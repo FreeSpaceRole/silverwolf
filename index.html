@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<body>
+<div class="effect-wrap"><canvas id="webglCanvas" width="1479" height="1331" style="touch-action: pan-y; width: 1479.77px; height: 1331.79px;"></canvas></div>
+<script src="https://webstatic.hoyoverse.com/dora/lib/vue/2.6.11/vue.min.js" crossorigin=""></script>
+  <script src="https://webstatic.hoyoverse.com/dora/biz/mihoyo-browser-tips/v1/main.js"></script>
+  <script>window.miHoYoBrowserTips.init({
+        isSea: true
+      })</script>
+  <script src="https://webstatic.hoyoverse.com/dora/lib/sentry/5.10.2/sentry.min.js"></script>
+  <script src="https://webstatic.hoyoverse.com/dora/lib/sentry/5.10.2/sentry-vue.min.js"></script>
+  <script>Sentry.init({
+        dsn: 'https://2d2044ee9ba34d41b1deb282529024b0@sentry-sea.hoyoverse.com/9',
+        integrations: [new Sentry.Integrations.Vue({Vue: Vue, attachProps: true, logErrors: true})],
+        ignoreErrors: [
+          'The play() request was interrupted',
+          'The operation was aborted',
+          '$ is not defined',
+          'mihoyo-event-dialog-cancel',
+          "play() failed because the user didn't interact with the document first",
+          'The play method is not allowed by the user agent or the platform in the current context',
+          'Failed to fetch',
+          "Can't find variable: firebase",
+          
+        ]
+      });</script>
+</body>
