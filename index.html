@@ -1,26 +1,102 @@
 <!DOCTYPE html>
-<body>
-<div class="effect-wrap"><canvas id="webglCanvas" width="1479" height="1331" style="touch-action: pan-y; width: 1479.77px; height: 1331.79px;"></canvas></div>
-<script src="https://webstatic.hoyoverse.com/dora/lib/vue/2.6.11/vue.min.js" crossorigin=""></script>
-  <script src="https://webstatic.hoyoverse.com/dora/biz/mihoyo-browser-tips/v1/main.js"></script>
-  <script>window.miHoYoBrowserTips.init({
-        isSea: true
-      })</script>
-  <script src="https://webstatic.hoyoverse.com/dora/lib/sentry/5.10.2/sentry.min.js"></script>
-  <script src="https://webstatic.hoyoverse.com/dora/lib/sentry/5.10.2/sentry-vue.min.js"></script>
-  <script>Sentry.init({
-        dsn: 'https://2d2044ee9ba34d41b1deb282529024b0@sentry-sea.hoyoverse.com/9',
-        integrations: [new Sentry.Integrations.Vue({Vue: Vue, attachProps: true, logErrors: true})],
-        ignoreErrors: [
-          'The play() request was interrupted',
-          'The operation was aborted',
-          '$ is not defined',
-          'mihoyo-event-dialog-cancel',
-          "play() failed because the user didn't interact with the document first",
-          'The play method is not allowed by the user agent or the platform in the current context',
-          'Failed to fetch',
-          "Can't find variable: firebase",
-          
-        ]
-      });</script>
-</body>
+<html area="sea" device="pc" style="font-size: 114.18px; height: 100%; overflow: hidden;" mi18n-lang="en-us"><head><meta charset="utf-8"><style type="text/css">.effect-wrap{width:100%;height:100%;position:relative}.effect-wrap #webglCanvas2{position:absolute;left:0;top:0;width:100% !important;height:100% !important}.effect-wrap img,.effect-wrap .no-select{-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:rgba(0,0,0,0);outline:none;border:none}.effect-wrap .effect-hot-spot{position:absolute;left:50%;top:50%;-webkit-transform:translate(-50%, -50%);-ms-transform:translate(-50%, -50%);transform:translate(-50%, -50%);z-index:100}.effect-wrap .effect-hot-spot .loading-text{position:absolute;width:100%;top:7rem;font-size:.24rem;text-align:center;color:#b69d6d}.effect-wrap .effect-hot-spot .loading-text2{position:absolute;width:100%;top:7.5rem;font-size:.24rem;text-align:center;color:#e4dcce}.effect-wrap .effect-hot-spot .ava-dialog{position:absolute;left:0;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.88);display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.effect-wrap .effect-hot-spot .ava-dialog #webglCanvas{width:100%;height:100%;z-index:300}.effect-wrap .effect-hot-spot .ava-dialog .model-wrap{position:relative;width:9rem;height:8rem}.effect-wrap .effect-hot-spot .ava-dialog .ava-bg{width:9rem;position:absolute;left:0;bottom:0}.effect-wrap .effect-hot-spot .ava-dialog .ava-close{width:.48rem;height:.51rem;position:absolute;right:0;top:0;z-index:400;cursor:pointer}.effect-wrap .effect-hot-spot .ava-dialog .ava-loading{width:.64rem;position:absolute;left:50%;top:45%;-webkit-transform:translate(-50%, -50%);-ms-transform:translate(-50%, -50%);transform:translate(-50%, -50%);z-index:500}.effect-wrap .effect-hot-spot .ava-dialog .ava-title{color:#ffcf70;font-size:.26rem;position:absolute;font-weight:bolder;bottom:.34rem;left:.3rem}</style><style id="vuescroll-silde-mode-style" type="text/css">
+    @-webkit-keyframes loading-rotate {
+      to {
+        -webkit-transform: rotate(1turn);
+        transform: rotate(1turn);
+      }
+    }
+
+    @keyframes loading-rotate {
+      to {
+        -webkit-transform: rotate(1turn);
+        transform: rotate(1turn);
+      }
+    }
+
+    @-webkit-keyframes loading-wipe {
+      0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+      }
+      50% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -40px;
+      }
+      to {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -120px;
+      }
+    }
+
+    @keyframes loading-wipe {
+      0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+      }
+      50% {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -40px;
+      }
+      to {
+        stroke-dasharray: 90, 150;
+        stroke-dashoffset: -120px;
+      }
+    }
+
+    .__vuescroll .__refresh,
+    .__vuescroll .__load {
+      position: absolute;
+      width: 100%;
+      color: black;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      font-size: 16px;
+    }
+    .__vuescroll .__refresh svg,
+    .__vuescroll .__load svg {
+      margin-right: 10px;
+      width: 25px;
+      height: 25px;
+      vertical-align: sub;
+    }
+    .__vuescroll .__refresh svg.active,
+    .__vuescroll .__load svg.active {
+      transition: all 0.2s;
+    }
+    .__vuescroll .__refresh svg.active.deactive,
+    .__vuescroll .__load svg.active.deactive {
+      transform: rotateZ(180deg);
+    }
+    .__vuescroll .__refresh svg path,
+    .__vuescroll .__refresh svg rect,
+    .__vuescroll .__load svg path,
+    .__vuescroll .__load svg rect {
+      fill: #20a0ff;
+    }
+    .__vuescroll .__refresh svg.start,
+    .__vuescroll .__load svg.start {
+      stroke: #343640;
+      stroke-width: 4;
+      stroke-linecap: round;
+      -webkit-animation: loading-rotate 2s linear infinite;
+      animation: loading-rotate 2s linear infinite;
+    }
+    .__vuescroll .__refresh svg.start .bg-path,
+    .__vuescroll .__load svg.start .bg-path {
+      stroke: #f2f2f2;
+      fill: none;
+    }
+    .__vuescroll .__refresh svg.start .active-path,
+    .__vuescroll .__load svg.start .active-path {
+      stroke: #20a0ff;
+      fill: none;
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: 0;
+      -webkit-animation: loading-wipe 1.5s ease-in-out infinite;
+      animation: loading-wipe 1.5s ease-in-out infinite;
+    }
+  </style></head><body style="margin: 0px; position: fixed; transform: rotate(0deg); height: 1305px; width: 2158px; overflow: hidden; transform-origin: center center;"><div id="flexible-fullscreen-body" style="left: 0px; top: 0px; position: absolute; width: 2158px; height: 1305px; overflow: hidden;"><div id="layout" style="position: relative; width: 2158px; height: 1233.14px; left: 0px; top: 35.9286px; overflow: hidden;"><div id="canvas-bg" style="position: absolute; left: 0px; top: 0px; width: 2158px; height: 1233.14px;"><div class="effect-wrap" issea="true"><canvas id="webglCanvas2" width="2500" height="1428" style="width: 2500px; height: 1428.57px;"></canvas> <div class="effect-hot-spot" style="width: 2740.32px; height: 1233.14px;"><!----> <!----> <div class="ava-dialog" style="opacity: 1;"><div class="model-wrap"><img src="images/ava_modal.938b1d34..png" alt="" srcset="" class="ava-bg"> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAzCAYAAADRlospAAAACXBIWXMAAAsTAAALEwEAmpwYAAAD4UlEQVRogc2Z32scVRTHP/lhqjVYTdriWvAHKBXUgj5IqqBYEItYsQGLhiJVfBF98h8Q9EERkYoVi4gKFiyYoMEHQRBEpYoKokVUbMUoVWiaqFUrbVI/PtzZZrk7m52dH9k9sOzsnXvO+X7mDnfmnO1TSWwEmKf3bRBYrP/oT74vBJ4Aat1Q1KFtBibO/FJRH1Xn1YNqLRnrtc9q9V71S4NNqKC+ps66ZL0KcXdykRvtdtSfbLZegxhTP1b/i3ROo46qn/coxLD6QMpFPq6+pF5XnzjSoxBb1ZlI0yn12fqcxsm9BnGT+pG6EOmZUjemAfQKxDnq/eqJSMMx9Rl1Q+P8tADdhrhZ/Tol/151KJ7fKkg3IIbUcfWzlLxT6jVqX1aAbkBMqH9FuebUJ9WzW/m1C7pSENern6Tk2aeuXc43S/AqIYbV+9Tvotj/qq+rV7eLkTVRVRB3qr9GMf8x7DaZYnSSrGyIGwz7/GIUb0q9vAqAdhAXZYyxzrDPH4tizKvPqZd1oinPsreC+CWjf9rrgeqeHFrOFDSd2DxwG/BFw9hCMj6Qwf8b4OJobBrYm0NLrhVIW4nD6ha1P6PvzsRvVn1avSCvjiIAjRA7DO8wnfjeo76qrimioU9tv0zL23LNgLXAKPB9i/ObgINAbhFlAKRZDXgI2AjMAD8De6pIVPQWSvusV19M7vEF9WhyvKOCXLl2oXa2AdiaHA8C65Ljx4GhspNVAdDHkuhGGwRWlZ2sCoAZ4GQ0dgo4QENHrSyrAmAOeJgg+jBwBPgR2J+MlWqDZQdMbD/hqSxwJfAV8AFwuuxERbfRVcA2YLLF+TUE0X+3OF8DfisioOgtNA68DOxqcf5P0sXXCM3k9yjaUC6wB4+pB1yyRzL6bWp4TmjBoiiP07Dhff4Hm62pa5DyuSXFLzdEHoA7bC4DT6jPqwMZ/M9KBJcC0an4G9UPbS4DJw1lYJYVwBLL06wTVxu6xL9HCefU3eolnV65siCyJtuifpuS7AWzFzGVQLSbMKBuMzSd4j8X3jK0+/KKLwWiXfCdNrf7ZtWn1PNKEF8YYrmgY6Y3Wl9Rzy9RfCGItMFzDVc+3uoW1TcM7b6su03lEGlBxl2qoup23NA9qEJ0IYjYebNhnz8dOU+ql64QQEcQ9YP660H8hP3DsFVesYLiO4KoT75VPZQyeXcXhHcEgXqX6V3it9WrugzQDmIU9WR0YtbQn1/fA+LbQezrBx6MSoRp4DHgaKFCo1xLaygfAj6tE25PiN40FBxF3m9WYiXeNfmzu7Em3g68QwWtj5JtBLgWeB+q641WbUMkLZr/AaWj5uhTHh1bAAAAAElFTkSuQmCC" alt="" srcset="" class="ava-close"> <!----> <div class="effect-wrap"><canvas id="webglCanvas" width="1479" height="1331" style="touch-action: pan-y; width: 1479.77px; height: 1331.79px;"></canvas></div></div></div></div></div></div></div></div></body></html>
+  
+  
